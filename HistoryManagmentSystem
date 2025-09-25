@@ -1,0 +1,174 @@
+
+
+
+package com.mycompany.historymanagment;
+
+
+public class HistoryManagment {
+
+    public static void main(String[] args) {
+        
+        History person1=new History ("Mohit ");
+         History person2=new History ("Aaru  ");
+         History person3=new History ("NAndani   ");
+         History person4=new History ("Paridhi... ");
+           History person5=new History ("Nikhil ");
+         History person6=new History ("Kunal  ");
+         History person7=new History ("YAshwant ");
+         History person8=new History ("HAcker ");
+         
+                  Stack person =new Stack();
+                  
+     
+   
+         
+       
+         person.addHistory(person1);
+         person.addHistory(person2);
+         person.addHistory(person3);
+         person.addHistory(person4);
+         person.addHistory(person1);
+         person.addHistory(person5);
+         person.addHistory(person8);
+         person.addHistory(person1);
+          person.addHistory(person1);
+         person.addHistory(person2);
+         person.addHistory(person3);
+         person.addHistory(person5);
+         person.addHistory(person1);
+         person.addHistory(person5);
+         person.addHistory(person7);
+         person.addHistory(person3);
+         
+         person.addHistory(person8);
+         person.ViewAllHistory();
+         
+         
+         System.out.println("===============Last Person==============");
+        History lastperson=person.getValue();
+        
+        System.out.println(lastperson);
+         
+        System.out.println("==============================");
+         System.out.println("After Deleting ");
+         
+    person.deleteHistory();
+    person.deleteHistory();
+    person.deleteHistory();
+    
+    
+    person.ViewAllHistory();
+         
+    
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+package com.mycompany.historymanagment;
+
+import java.util.Date;
+class History {
+    
+    private String username;
+    private  Date timestamp ;
+    
+    public History(String username){
+        this.username=username;
+        this.timestamp=new Date();
+    }
+    public String getUsername(){
+        return username;
+    }
+  
+    @Override
+   public String toString(){
+       return "[" +timestamp+ "] History of :" +username;
+   }
+}
+    
+
+
+
+
+package com.mycompany.historymanagment;
+
+
+public class Stack {
+    private History data[]=new History[0];
+    private int top=-1;
+    
+    
+    public boolean  addHistory(History value  ){
+        top++;
+        History temp[]=data;
+        data=new History[data.length+1];
+        int index=0;
+        for(History i : temp){
+            data[index]=i;
+            index++;
+        }
+        data[index]=value;
+        
+        System.out.println(" History Added  :"+value.getUsername());
+        return true;
+          
+     
+    }
+    
+    
+    public History getValue(){
+        if(top==-1){
+            System.out.println("NO History Found ");
+            return null;
+        }
+        else{
+            return data[top];
+        }
+    }
+    
+    
+   
+    public History deleteHistory(){
+        if(top==-1){
+            System.out.println("NO History Found ");
+            return null;
+        }
+        History value =data[top];
+        top--;
+        
+        History temp[]=data;
+        data=new History[data.length-1];
+        int index =0;
+        for(int  i=0;i<temp.length-1;i++){
+            data[index]=temp[i];
+            index++;
+        }
+        return value ;
+    
+    }
+    
+    
+    public void ViewAllHistory(){
+        if(top==-1){
+            System.out.println("No History Found ");
+            return;
+        }
+        
+        System.out.println("Your History");
+        for(int i=top;i>=0;i--){
+            
+            System.out.println("  " + (i+1) + " .  " + data[i]);
+        }
+        System.out.println("====================================");
+    } 
+    
+}
